@@ -19,6 +19,11 @@ export default async function handler(req, res) {
     if (req.method != "POST") {
         return res.json({ success: false, msg: "Method not allowed" });
     }
+    const apiKey = req.headers['x-api-key']; // Check the API key from request headers
+
+    if (apiKey !== process.env.apiKey) {
+        return res.json({ success: false, msg: "Unauthorized access" });
+    }
     await NextCors(req, res, {
         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         origin: 'https://www.tedxjmi.com',
