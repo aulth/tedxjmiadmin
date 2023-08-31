@@ -35,7 +35,7 @@ const QrScanner = () => {
             if (json.success) {
                 setName(json.name);
             } else {
-                setData(json.msg);
+                setName(json.msg);
             }
         } catch (error) {
             console.error('Error:', error);

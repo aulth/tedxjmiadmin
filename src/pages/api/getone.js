@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     let tickets = await Ticket.findOne({ticketNumber:data.ticketNumber});
     if (!tickets) {
-        return res.json({ success: false, msg: "Tickets Not Found" })
+        return res.json({ success: false, msg: "Invalid Ticket" })
     }
     return res.json({ success: true, msg: "Ticket Found", name: tickets.name })
 }
