@@ -14,7 +14,9 @@ const QrScanner = () => {
                 console.log("data found", scanData)
                 playAlarmSound();
                 setData(scanData?.text);
-                handleVerify(scanData?.text)
+                setTimeout(() => {
+                    handleVerify(scanData?.text)
+                }, 200);
                 setStartScan(false);
             }
     };
