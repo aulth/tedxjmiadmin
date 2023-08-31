@@ -25,9 +25,9 @@ export default async function handler(req, res) {
         const data = req.body;
         const origin = req.headers['origin'];
         const allowedOrign = ['https://www.tedxjmi.org', 'http://127.0.0.1:5500',]
-        if(!allowedOrign.includes(origin)){
-            return res.json({success:false, msg:"Unathorized"});
-        }
+        // if(!allowedOrign.includes(origin)){
+        //     return res.json({success:false, msg:"Unathorized"});
+        // }
         try {
             const ticketCount = await Ticket.find({});
             const ticketNumber = `23TEDXJMI${ticketCount.length + 1}`;
@@ -154,7 +154,7 @@ export default async function handler(req, res) {
         `
             const mailOption = {
                 from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
-                to: 'mohdusman.you@gmail.com',
+                to: data.email,
                 subject: `Ticket Received`,
                 html: message
             };
