@@ -8,22 +8,23 @@ const QrScanner = () => {
     const playAlarmSound = () => {
         const audio = new Audio('/alarm.mp3');
         audio.play();
-      };
+    };
     const handleScan = async (scanData, error) => {
-            if (scanData) {
-                console.log("data found", scanData)
-                playAlarmSound();
-                setData(scanData?.text);
-                setTimeout(() => {
-                    handleVerify(scanData?.text)
-                }, 200);
-                setStartScan(false);
-            }
+        if (scanData) {
+            console.log("data found", scanData)
+            playAlarmSound();
+            setData(scanData?.text);
+            handleVerify(scanData?.text)
+            setStartScan(false);
+        }
     };
     const handleReset = () => {
-        if (typeof window != undefined) {
-            window.location.reload();
-        }
+        // if (typeof window != undefined) {
+        //     window.location.reload();
+        // }
+        setStartScan(true);
+        setData("");
+        setName("");
     }
     const handleVerify = async (number) => {
         try {
@@ -51,14 +52,22 @@ const QrScanner = () => {
                 <h2 className="text-center text-lg font-bold text-red-500 my-4">{name}</h2>
                 <div className="w-52 relative mx-auto rounded-full">
                     {startScan && (
-                        <>
+                        <div className="relative w-full h-full">
+                            <div className="w-8 aspect-square border-l-2 border-t-2 border-red-400 absolute top-0 left-0"></div>
+                            <div className="w-8 aspect-square border-r-2 border-t-2 border-red-400 absolute top-0 right-0"></div>
+                            <div className="w-8 aspect-square border-r-2 border-b-2 border-red-400 absolute bottom-0 right-0"></div>
+                            <div className="w-8 aspect-square border-l-2 border-b-2 border-red-400 absolute bottom-0 left-0"></div>
+                            <div
+                                className="absolute top-0 left-0 w-full h-1 bg-red-400 z-10"
+                                style={{ animation: "scanAnimation 4s linear infinite" }}
+                            ></div>
                             <QrReader
-                                facingMode={"environment"}
+                                constraints={{ facingMode: 'environment' }}
                                 delay={1000}
                                 onResult={handleScan}
                                 style={{ width: "100%" }}
                             />
-                        </>
+                        </div>
                     )}
                     {
                         !startScan && !name &&

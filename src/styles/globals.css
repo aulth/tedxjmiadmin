@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Add this CSS to your stylesheet */
+@keyframes scanAnimation {
+    0% {
+        top:0px;
+    }
+    50% {
+        top:calc(100% - 4px);
+    }
+    100% {
+        top:0%;
+    }
+}
