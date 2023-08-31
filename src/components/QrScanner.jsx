@@ -19,9 +19,6 @@ const QrScanner = () => {
         }
     };
     const handleReset = () => {
-        // if (typeof window != undefined) {
-        //     window.location.reload();
-        // }
         setStartScan(true);
         setData("");
         setName("");
@@ -31,7 +28,7 @@ const QrScanner = () => {
             const response = await fetch('/api/getone', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ticketNumber: number }),
+                body: JSON.stringify({ ticketNumber: number, adminPin:process.env.NEXT_PUBLIC_ADMIN_PIN }),
             });
             const json = await response.json();
             console.log(json)

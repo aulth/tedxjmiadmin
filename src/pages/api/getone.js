@@ -14,8 +14,10 @@ export default async function handler(req, res) {
         optionsSuccessStatus: 200,
     });
     const data = req.body;
-
-    let tickets = await Ticket.findOne({ticketNumber:data.ticketNumber});
+    if (process.env.adminPin != data.adminPin) {
+        return res.json({ success: false, msg: "Unauthorized" })
+    }
+    let tickets = await Ticket.findOne({ ticketNumber: data.ticketNumber });
     if (!tickets) {
         return res.json({ success: false, msg: "Invalid Ticket" })
     }
