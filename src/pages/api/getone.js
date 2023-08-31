@@ -21,5 +21,8 @@ export default async function handler(req, res) {
     if (!tickets) {
         return res.json({ success: false, msg: "Invalid Ticket" })
     }
+    if(tickets.used){
+        return res.json({ success: false, msg: "Already used" })
+    }
     return res.json({ success: true, msg: "Ticket Found", name: tickets.name })
 }

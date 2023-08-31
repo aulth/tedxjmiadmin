@@ -13,6 +13,10 @@ const Ticket = new mongoose.Schema({
         type: String,
         required: true,
     },
+    used:{
+        type: Boolean,
+        default:false
+    }
 }, { timestamps: true })
 
 mongoose.models = {};
