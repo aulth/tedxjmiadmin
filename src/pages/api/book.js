@@ -1,7 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import connectToDb from "middleware/connectToDb";
 import Ticket from "../../../models/Ticket";
-import NextCors from 'nextjs-cors';
+import cors from 'cors';
+
 connectToDb();
 import { createTransport } from "nodemailer";
 const key = process.env.key;
@@ -14,29 +15,32 @@ const transporter = createTransport({
         pass: key
     },
 });
-
+const corsHandler = cors({
+    origin: '*', // Replace with the allowed origin
+    methods: ['POST'], // Adjust the allowed methods
+});
 export default async function handler(req, res) {
-    if (req.method != "POST") {
-        return res.json({ success: false, msg: "Method not allowed" });
-    }
-    const origin  = req.headers['origin'];
-    if (origin !== "https://www.tedxjmi.org" || origin!=="http://127.0.0.1:5500") {
-        return res.json({ success: false, msg: "Unauthorized access" });
-    }
-    const data = req.body;
-    try {
-        const ticketCount = await Ticket.find({});
-        const ticketNumber = `23TEDXJMI${ticketCount.length + 1}`;
-
-        const newTicket = await Ticket.create({
-            ticketNumber: ticketNumber,
-            name: data.name,
-            email: data.email
-        })
-        if (!newTicket) {
-            return res.json({ success: false, msg: "Booking failed" })
+    corsHandler(req, res, async () => {
+        // Handle the API request here
+        const data = req.body;
+        const origin = req.headers['origin'];
+        const allowedOrign = ['https://www.tedxjmi.org', 'http://127.0.0.1:5500']
+        if(!allowedOrign.includes(origin)){
+            return res.json({success:false, msg:"Unathorized"});
         }
-        const message = `    
+        try {
+            const ticketCount = await Ticket.find({});
+            const ticketNumber = `23TEDXJMI${ticketCount.length + 1}`;
+
+            const newTicket = await Ticket.create({
+                ticketNumber: ticketNumber,
+                name: data.name,
+                email: data.email
+            })
+            if (!newTicket) {
+                return res.json({ success: false, msg: "Booking failed" })
+            }
+            const message = `    
         <div style="margin:0px;padding:0px">
     <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%"
         style="margin:0 auto;text-align:center;font-family:open sans,helvetica neue,sans-serif">
@@ -81,7 +85,7 @@ export default async function handler(req, res) {
                                                             style="width: 440px;margin:auto;">
                                                             <h3
                                                                 style="text-align: center;font-weight: bold;font-size: large;color: red;">
-                                                                Mohd Usman</h3>
+                                                                ${data.name}</h3>
                                                             <p style="text-align: center;">23 September 2023</p>
                                                             <p style="text-align: center;">M.A. Ansari Auditorium, Jamia
                                                                 Millia Islamia, New Delhi - India</p>
@@ -148,19 +152,22 @@ export default async function handler(req, res) {
         alt="" class="CToWUd" data-bit="iit">
 </div>
         `
-        const mailOption = {
-            from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
-            to: 'mohdusman.you@gmail.com',
-            subject: `Ticket Received`,
-            html: message
-        };
-        transporter.sendMail(mailOption, (err, info) => {
-            if (err) {
-                return res.json({ success: false, msg: err.message })
-            }
-            return res.json({ success: true, msg: "Ticket Booked", data: newTicket })
-        });
-    } catch (error) {
-        return res.json({ success: false, msg: error.message })
-    }
+            const mailOption = {
+                from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
+                to: 'mohdusman.you@gmail.com',
+                subject: `Ticket Received`,
+                html: message
+            };
+            transporter.sendMail(mailOption, (err, info) => {
+                if (err) {
+                    return res.json({ success: false, msg: err.message })
+                }
+                return res.json({ success: true, msg: "Ticket Booked", data: newTicket })
+            });
+        } catch (error) {
+            return res.json({ success: false, msg: error.message })
+        }
+        // res.status(200).json({ name: 'John Doe' });
+    });
+
 }
