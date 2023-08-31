@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         return res.json({ success: false, msg: "Method not allowed" });
     }
     const origin  = req.headers['origin'];
-    if (origin !== "https://www.tedxjmi.org") {
+    if (origin !== "https://www.tedxjmi.org" || origin!=="http://127.0.0.1:5500") {
         return res.json({ success: false, msg: "Unauthorized access" });
     }
     const data = req.body;
