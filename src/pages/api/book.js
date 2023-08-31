@@ -35,7 +35,8 @@ export default async function handler(req, res) {
             const newTicket = await Ticket.create({
                 ticketNumber: ticketNumber,
                 name: data.name,
-                email: data.email
+                email: data.email,
+                used:false
             })
             if (!newTicket) {
                 return res.json({ success: false, msg: "Booking failed" })
