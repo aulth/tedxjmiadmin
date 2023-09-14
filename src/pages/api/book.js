@@ -156,7 +156,7 @@ export default async function handler(req, res) {
             const mailOption = {
                 from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
                 to: data.email,
-                subject: `Ticket Received`,
+                subject: `Registration Pass`,
                 html: message
             };
             transporter.sendMail(mailOption, (err, info) => {
