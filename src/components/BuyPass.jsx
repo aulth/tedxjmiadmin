@@ -123,41 +123,37 @@ const BuyPass = () => {
                                     <button onClick={() => { setJmiStudent(false) }} type='button' className="px-2 py-1 border-2 border-white bg-black rounded-sm text-white text-sm font-semibold">Non-JMI</button>
                                 </div>
                             </div>
-                            <div>
-                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900  ">Bank Name</label>
-                                <input type="text" value={"Indian Bank"} disabled name="bankname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
-                            </div>
                             <div className='text-sm '>
                                 <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900  ">Deposit the money into this account and share the screenshot below</label>
                                 <div className="w-full grid grid-cols-4">
-                                    <div className='col-span-1 font-semibold'>
+                                    <div className='col-span-2 font-semibold'>
                                         Bank Name:
                                     </div>
-                                    <div className='col-span-1'>
+                                    <div className='col-span-2'>
                                         Indian Bank
                                     </div>
                                 </div>
                                 <div className="w-full  grid grid-cols-4">
-                                    <div className='col-span-1 font-semibold'>
+                                    <div className='col-span-2 font-semibold'>
                                         Beneficiary:
                                     </div>
-                                    <div className='col-span-3'>
+                                    <div className='col-span-2'>
                                         JMI-Seminar and Symposium
                                     </div>
                                 </div>
                                 <div className="w-full grid grid-cols-4">
-                                    <div className='col-span-1 font-semibold'>
+                                    <div className='col-span-2 font-semibold'>
                                         Account No:
                                     </div>
-                                    <div className='col-span-1'>
+                                    <div className='col-span-2'>
                                         6767690486
                                     </div>
                                 </div>
                                 <div className="w-full grid grid-cols-4">
-                                    <div className='col-span-1 font-semibold'>
+                                    <div className='col-span-2 font-semibold'>
                                         IFSC:
                                     </div>
-                                    <div className='col-span-1'>
+                                    <div className='col-span-2'>
                                         IDIB000J029
                                     </div>
                                 </div>
