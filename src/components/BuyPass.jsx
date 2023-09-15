@@ -67,6 +67,9 @@ const BuyPass = () => {
                     </a>
                 </div>
             </header>
+            <h2 className="text-xl font-bold text-center mt-4">
+                Buy <span className='text-red-500'>TEDx</span>JMI Pass
+            </h2>
             <div className="container flex justify-center items-center p-4 mx-auto">
                 <form onSubmit={handleSubmit} className="space-y-4 w-full md:w-[450px] md:space-y-6 border p-4 rounded" action="#">
                     <div>
