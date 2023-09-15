@@ -9,7 +9,6 @@ const Login = ({login, setLogin}) => {
     }
     const handleLogin = (e)=>{
         e.preventDefault();
-        console.log(process.env.NEXT_PUBLIC_ADMIN_PIN)
         if(process.env.NEXT_PUBLIC_ADMIN_PIN==pin){
             console.log('logged in')
             setLogin(true);

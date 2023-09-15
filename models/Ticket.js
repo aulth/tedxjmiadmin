@@ -21,7 +21,8 @@ const Ticket = new mongoose.Schema({
         type: Boolean,
         default:false
     },
-    screenshot: String
+    screenshot: String,
+    idCard: String
 }, { timestamps: true })
 
 mongoose.models = {};

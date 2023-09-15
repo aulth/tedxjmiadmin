@@ -3,7 +3,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import Spinner from './Spinner';
 
 const RequestList = ({ data, fetchTicket }) => {
-    const [processing, setProcessing] = useState(false)
+    const [processing, setProcessing] = useState(false);
+    const [imageUrl, setImageUrl] = useState(data.screenshot);
     const sendTicket = async (email) => {
         setProcessing(true);
         const response = await fetch('/api/sendticket', {
@@ -31,6 +32,10 @@ const RequestList = ({ data, fetchTicket }) => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+    const handleOpenModal = (url)=>{
+        setImageUrl(url);
+        setIsModalOpen(true);
+    }
     return (
         <>
             <Toaster position='top-right' />
@@ -45,7 +50,8 @@ const RequestList = ({ data, fetchTicket }) => {
                         </h3>
                     </div>
                     <div className="flex gap-1 items-center justify-center">
-                        <img onClick={openModal} className='w-10 cursor-pointer rounded aspect-square' src={data.screenshot?data.screenshot:''} alt="Payment screenshot" />
+                        <img onClick={()=>{handleOpenModal(data.screenshot)}} className='w-10 cursor-pointer rounded aspect-square' src={data.screenshot?data.screenshot:''} alt="Payment screenshot" />
+                        <img onClick={()=>{handleOpenModal(data.idCard)}} className='w-10 cursor-pointer rounded aspect-square' src={data.idCard?data.idCard:''} alt="ID Card" />
                         {
                             !processing &&
                             <button onClick={() => { sendTicket(data.email) }} className="text-sm h-full bg-green-500 text-white px-2 py-1 rounded">Send</button>
@@ -70,7 +76,7 @@ const RequestList = ({ data, fetchTicket }) => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </button>
-                                <img src={data.screenshot?data.screenshot:''} alt="Payment Screenshot Image" />
+                                <img src={imageUrl} alt="Payment Screenshot Image" />
                             </div>
                         </div>
                     </div>

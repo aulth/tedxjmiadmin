@@ -61,7 +61,8 @@ export default async function handler(req, res) {
                 email: data.email.toLowerCase(),
                 used:false,
                 sent:false,
-                screenshot:data.screenshot
+                screenshot:data.screenshot,
+                idCard:data.idCard
             })
             if (!newTicket) {
                 return res.json({ success: false, msg: "Purchase failed", data })
