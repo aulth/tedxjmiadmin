@@ -168,7 +168,7 @@ const BuyPass = () => {
                             </div>
                             <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900   underline italic">If we find any discrepancy in the details filled by you, your entry will be deemed invalid and your money will not be returned.</label>
                             <div>
-                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900  ">{jmiStudent ? "Student ID Card" : "Govt. ID (Aadhar, PAN, etc."} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900  ">{jmiStudent ? "Student ID Card" : "Govt. ID (Aadhar, PAN, etc.)"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
                                 <input
                                     type="file"
                                     name="file"
