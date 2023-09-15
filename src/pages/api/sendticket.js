@@ -19,23 +19,12 @@ const corsHandler = cors({
     origin: '*', // Replace with the allowed origin
     methods: ['POST'], // Adjust the allowed methods
 });
-function generateTicket() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let ticketNumber = '';
-  
-    for (let i = 0; i < 6; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      ticketNumber += characters.charAt(randomIndex);
-    }
-  
-    return ticketNumber;
-  }
 export default async function handler(req, res) {
     corsHandler(req, res, async () => {
         // Handle the API request here
         const data = req.body;
         if(data.adminPin!=process.env.adminPin){
-            return res.json({success:false, msg:"Unauthorized"});
+            return res.json({success:false, msg:"Unauthorized"})
         }
         const origin = req.headers['origin'];
         const allowedOrign = ['https://www.tedxjmi.org', 'http://127.0.0.1:5500',]
@@ -43,22 +32,7 @@ export default async function handler(req, res) {
         //     return res.json({success:false, msg:"Unathorized"});
         // }
         try {
-            const ifExist = await Ticket.findOne({email:data.email.toLowerCase()});
-            if(ifExist){
-                return res.json({ success: false, msg: "Email already used", data })
-            }
-            const ticketNumber = generateTicket();
-
-            const newTicket = await Ticket.create({
-                ticketNumber: ticketNumber,
-                name: data.name,
-                email: data.email,
-                used:false,
-                sent:true
-            })
-            if (!newTicket) {
-                return res.json({ success: false, msg: "Booking failed", data })
-            }
+            const ticket = await Ticket.findOneAndUpdate({email:data.email.toLowerCase()}, {sent:true});
             const message = `    
         <div style="margin:0px;padding:0px">
     <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%"
@@ -78,7 +52,7 @@ export default async function handler(req, res) {
                                             </tr>
                                             <tr>
                                                 <td style="padding:38px 10px 0px;font-size:24px;color:red;line-height:30px;font-weight:bold;text-transform:capitalize"
-                                                    width="600">Hi, ${data.name} </td>
+                                                    width="600">Hi, ${ticket.name} </td>
                                             </tr>
                                             <tr>
                                                 <td
@@ -98,13 +72,13 @@ export default async function handler(req, res) {
                                                         <div
                                                             style="width: 440px;border-bottom: 1px solid #e7e3e3;margin:auto;height:350px;display: flex;justify-content: center;align-items: center;;">
                                                             <img style="margin: auto;width: 150px;"
-                                                                src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ticketNumber}'/>
+                                                                src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ticket.ticketNumber}'/>
                                                         </div>
                                                         <div
                                                             style="width: 440px;margin:auto;">
                                                             <h3
                                                                 style="text-align: center;font-weight: bold;font-size: large;color: red;">
-                                                                ${data.name}</h3>
+                                                                ${ticket.name}</h3>
                                                             <p style="text-align: center;">23 September 2023</p>
                                                             <p style="text-align: center;">M.A. Ansari Auditorium, Jamia
                                                                 Millia Islamia, New Delhi - India</p>
@@ -181,7 +155,7 @@ export default async function handler(req, res) {
                 if (err) {
                     return res.json({ success: false, msg: err.message, data })
                 }
-                return res.json({ success: true, msg: "Pass Sent", data: newTicket })
+                return res.json({ success: true, msg: "Pass Sent", data: ticket })
             });
         } catch (error) {
             return res.json({ success: false, msg: error.message, data })

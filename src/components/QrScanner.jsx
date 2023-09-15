@@ -11,7 +11,6 @@ const QrScanner = () => {
     };
     const handleScan = async (scanData, error) => {
         if (scanData) {
-            console.log("data found", scanData)
             playAlarmSound();
             setData(scanData?.text);
             handleVerify(scanData?.text)
@@ -31,7 +30,6 @@ const QrScanner = () => {
                 body: JSON.stringify({ ticketNumber: number, adminPin:process.env.NEXT_PUBLIC_ADMIN_PIN }),
             });
             const json = await response.json();
-            console.log(json)
             if (json.success) {
                 setName(json.name);
             } else {

@@ -16,7 +16,12 @@ const Ticket = new mongoose.Schema({
     used:{
         type: Boolean,
         default:false
-    }
+    },
+    sent:{
+        type: Boolean,
+        default:false
+    },
+    screenshot: String
 }, { timestamps: true })
 
 mongoose.models = {};

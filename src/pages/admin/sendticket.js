@@ -1,17 +1,19 @@
-import BuyPass from "@/components/BuyPass";
-import Head from "next/head";
-export default function App() {
+import Ticket from '@/components/Ticket'
+import Head from 'next/head'
+const sendticket = () => {
   return (
     <>
-   <Head>
+    <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Buy TEDxJMI pass" />
+        <meta name="description" content="Send Ticket" />
         <meta name="author" content="Mohd Usman" />
         <meta name="keywords" content="TedX, Jmi, Tedx Jmi 2023" />
-        <title>TEDxJMI - Buy Pass</title>
+        <title>TEDxJMI - Send Ticket</title>
       </Head>
-    <BuyPass/>
+    <Ticket/>
     </>
   )
 }
+
+export default sendticket

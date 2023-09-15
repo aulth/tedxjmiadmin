@@ -11,5 +11,6 @@ export default async function handler(req, res) {
     if (!tickets) {
         return res.json({ success: false, msg: "Tickets Not Found" })
     }
+    tickets = tickets.filter(item=>!item.sent);
     return res.json({ success: true, msg: "Ticket Found", tickets: tickets })
 }
