@@ -170,7 +170,7 @@ const BuyPass = () => {
                                 <label htmlFor="transactionId" className="block mb-2 text-sm font-medium text-gray-900 ">Reference / Transaction id</label>
                                 <input type="text" onChange={handleChange} value={data.transactionId} name="transactionId" placeholder='xxxxxx' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                             </div>
-                            <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900   underline italic">Documents will be verified if any discrepancy found you will miss the opportunity.</label>
+                            <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900   underline italic">If we find any discrepancy in the details filled by you, your entry will be deemed invalid and your money will not be returned.</label>
                             <div>
                                 <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900  ">{jmiStudent ? "Student ID Card" : "Aadhar Card"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
                                 <input
