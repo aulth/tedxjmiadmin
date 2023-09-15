@@ -55,7 +55,7 @@ export default async function handler(req, res) {
             }
             const transactioId = await Ticket.findOne({ transactionId: data.transactionId });
             if (transactioId) {
-                return res.json({ success: false, msg: "Please don't try scam with same transactio id" })
+                return res.json({ success: false, msg: "Please don't try scam with same transaction id" })
             }
             const ticketNumber = generateTicket();
 

@@ -1,4 +1,4 @@
-import Ticket from '@/components/Ticket'
+import SendBulkTicket from '@/components/admin/SendBulkTicket'
 import Head from 'next/head'
 const sendticket = () => {
   return (
@@ -11,7 +11,7 @@ const sendticket = () => {
         <meta name="keywords" content="TedX, Jmi, Tedx Jmi 2023" />
         <title>TEDxJMI - Send Ticket</title>
       </Head>
-    <Ticket/>
+    <SendBulkTicket/>
     </>
   )
 }

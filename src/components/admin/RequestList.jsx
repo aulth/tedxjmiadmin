@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 
 const RequestList = ({ data, fetchTicket }) => {
     const [processing, setProcessing] = useState(false);

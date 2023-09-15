@@ -1,5 +1,4 @@
-import Home from "@/components/Home";
-import Request from "@/components/Request";
+import Requests from "@/components/admin/Requests";
 import Head from "next/head";
 export default function App() {
   return (
@@ -12,7 +11,7 @@ export default function App() {
         <meta name="keywords" content="TedX, Jmi, Tedx Jmi 2023" />
         <title>TEDxJMI - Ticket Reuqests</title>
       </Head>
-    <Request/>
+    <Requests/>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 
 function ExcelUploader() {
     const [excelData, setExcelData] = useState([]);

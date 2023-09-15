@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Login from './Login';
 import RequestList from './RequestList';
 
-const Request = () => {
+const Requests = () => {
   const [login, setLogin] = useState(false);
   const [tickets, setTickets] = useState();
   const fetchTicket = async () => {
@@ -51,4 +51,4 @@ const Request = () => {
   )
 }
 
-export default Request
+export default Requests
