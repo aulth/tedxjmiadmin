@@ -10,6 +10,7 @@ const BuyPass = () => {
     const [idCard, setIdCard] = useState('')
     const [buying, setBuying] = useState(false);
     const [jmiStudent, setJmiStudent] = useState(true);
+    const [success, setSuccess] = useState(false)
     const uploadScreenshot = async (e) => {
         e.preventDefault();
         if (typeof window !== 'undefined') {
@@ -57,6 +58,9 @@ const BuyPass = () => {
         if (!data.email) {
             return toast.error('Please enter your email');
         }
+        if (!data.transactionId) {
+            return toast.error('Please enter transaction id');
+        }
         if (!idCard) {
             return toast.error(`Please upload ${jmiStudent ? 'ID card' : 'Aadhar card'}`);
         }
@@ -70,15 +74,17 @@ const BuyPass = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: data.name, email: data.email, screenshot: screenshot, idCard: idCard, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+            body: JSON.stringify({ name: data.name, email: data.email, screenshot: screenshot, idCard: idCard, transactionId: data.transactionId, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
         })
         const json = await response.json();
         if (json.success) {
             toast.success(json.msg);
+            setSuccess(true);
         } else {
+            setSuccess(false)
             toast.error(json.msg);
         }
-        setData({ name: "", email: "" })
+        setData({ name: "", email: "", transactionId: "" })
         setScreenshot('');
         setBuying(false);
     }
@@ -92,81 +98,123 @@ const BuyPass = () => {
                     </a>
                 </div>
             </header>
-            <h2 className="text-xl font-bold text-center mt-4">
-                Buy <span className='text-red-500'>TEDx</span>JMI Pass
-            </h2>
-            <div className="container flex justify-center items-center p-4 mx-auto">
-                <form onSubmit={handleSubmit} className="space-y-4 w-full md:w-[450px] md:space-y-6 border p-4 rounded" action="#">
-                    <div>
-                        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" value={data.name} onChange={handleChange} name="name" id="name" placeholder="Mohd Usman" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                        <input type="email" value={data.email} onChange={handleChange} name="email" id="email" placeholder="mohdusman.you@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
-                    <div className="flex gap-2 justify-start items-center">
-                        <div className={`${jmiStudent ? 'bg-red-500' : ""} p-0.5 rounded`}>
-                            <button onClick={() => { setJmiStudent(true) }} type='button' className="px-2 py-1 border-2 border-white bg-red-500 rounded-sm text-white text-sm font-semibold">JMI Student</button>
-                        </div>
-                        <div className={`${!jmiStudent ? 'bg-black' : ""} p-0.5 rounded`}>
-                            <button onClick={() => { setJmiStudent(false) }} type='button' className="px-2 py-1 border-2 border-white bg-black rounded-sm text-white text-sm font-semibold">Non-JMI</button>
-                        </div>
-                    </div>
-                    <div>
-                        <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                        <input type="text" value={jmiStudent ? '500' : '750'} disabled onChange={handleChange} name="email" id="email" placeholder="mohdusman.you@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
-                    <div>
-                        <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bank Name</label>
-                        <input type="text" value={"Indian Bank"} disabled name="bankname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
-                    <div>
-                        <label htmlFor="holder name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Beneficiary Name</label>
-                        <input type="text" value={"JMI-Seminar and Symposium"} disabled name="holdername" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
-                    <div>
-                        <label htmlFor="account number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account No</label>
-                        <input type="text" value={"6767690486"} disabled name="accountnumber" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
-                    <div>
-                        <label htmlFor="account number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">IFSC</label>
-                        <input type="text" value={"IDIB000J029"} disabled name="accountnumber" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-                    </div>
+            {
+                !success &&
+                <>
+                    <h2 className="text-xl font-bold text-center mt-4">
+                        Buy <span className='text-red-500'>TEDx</span>JMI Pass
+                    </h2>
+                    <div className="container flex justify-center items-center p-4 mx-auto">
 
-                    <div>
-                        <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{jmiStudent ? "Student ID Card" : "Aadhar Card"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
-                        <input
-                            type="file"
-                            name="file"
-                            id="id"
-                            onChange={uploadIdCard}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Screenshot {screenshotUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
-                        <input
-                            type="file"
-                            name="file"
-                            id="file"
-                            onChange={uploadScreenshot}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        />
-                    </div>
+                        <form onSubmit={handleSubmit} className="space-y-4 w-full md:w-[450px] md:space-y-6 border p-4 rounded" action="#">
+                            <div>
+                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <input type="text" value={data.name} onChange={handleChange} name="name" id="name" placeholder="Your name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" />
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <input type="email" value={data.email} onChange={handleChange} name="email" id="email" placeholder="example@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
+                            </div>
+                            <div className="flex gap-2 justify-start items-center">
+                                <div className={`${jmiStudent ? 'bg-red-500' : ""} p-0.5 rounded`}>
+                                    <button onClick={() => { setJmiStudent(true) }} type='button' className="px-2 py-1 border-2 border-white bg-red-500 rounded-sm text-white text-sm font-semibold">JMI Student</button>
+                                </div>
+                                <div className={`${!jmiStudent ? 'bg-black' : ""} p-0.5 rounded`}>
+                                    <button onClick={() => { setJmiStudent(false) }} type='button' className="px-2 py-1 border-2 border-white bg-black rounded-sm text-white text-sm font-semibold">Non-JMI</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bank Name</label>
+                                <input type="text" value={"Indian Bank"} disabled name="bankname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
+                            </div>
+                            <div className='text-sm '>
+                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deposit the money into this account and share the screenshot below</label>
+                                <div className="w-full grid grid-cols-4">
+                                    <div className='col-span-1 font-semibold'>
+                                        Bank Name:
+                                    </div>
+                                    <div className='col-span-1'>
+                                        Indian Bank
+                                    </div>
+                                </div>
+                                <div className="w-full  grid grid-cols-4">
+                                    <div className='col-span-1 font-semibold'>
+                                        Beneficiary:
+                                    </div>
+                                    <div className='col-span-3'>
+                                        JMI-Seminar and Symposium
+                                    </div>
+                                </div>
+                                <div className="w-full grid grid-cols-4">
+                                    <div className='col-span-1 font-semibold'>
+                                        Account No:
+                                    </div>
+                                    <div className='col-span-1'>
+                                        6767690486
+                                    </div>
+                                </div>
+                                <div className="w-full grid grid-cols-4">
+                                    <div className='col-span-1 font-semibold'>
+                                        IFSC:
+                                    </div>
+                                    <div className='col-span-1'>
+                                        IDIB000J029
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                <input type="email" value={jmiStudent ? '510' : '750'} disabled onChange={handleChange} name="email" id="email" placeholder="mohdusman.you@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
+                            </div>
+                            <div>
+                                <label htmlFor="transactionId" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reference / Transaction id</label>
+                                <input type="text" onChange={handleChange} value={data.transactionId} name="transactionId" placeholder='xxxxxx' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
+                            </div>
+                            <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white underline italic">Documents will be verified if any discrepancy found you will miss the opportunity.</label>
+                            <div>
+                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{jmiStudent ? "Student ID Card" : "Aadhar Card"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <input
+                                    type="file"
+                                    name="file"
+                                    id="id"
+                                    onChange={uploadIdCard}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Screenshot {screenshotUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <input
+                                    type="file"
+                                    name="file"
+                                    id="file"
+                                    onChange={uploadScreenshot}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                />
+                            </div>
 
-                    {
-                        !buying &&
-                        <button type="submit" disabled={screenshotUploading || idCardUploading} className="w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Submit</button>
-                    }
-                    {
-                        buying &&
-                        <div className="flex justify-center">
-                            <Spinner />
-                        </div>
-                    }
-                </form>
-            </div>
+                            {
+                                !buying &&
+                                <button type="submit" disabled={screenshotUploading || idCardUploading} className="w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Submit</button>
+                            }
+                            {
+                                buying &&
+                                <div className="flex justify-center">
+                                    <Spinner />
+                                </div>
+                            }
+                        </form>
+                    </div>
+                </>
+            }
+            {
+                success &&
+                <div className="container flex justify-center items-center p-4 mx-auto">
+                    <div className="space-y-2 w-full md:w-[450px]   p-4 rounded">
+                        <h2 className="font-bold text-xl text-center text-green-500">Thanks! for Registering</h2>
+                        <h3 className="font-semibold text-center">You will receive your pass shortly.</h3>
+                    </div>
+                </div>
+            }
         </>
     )
 }

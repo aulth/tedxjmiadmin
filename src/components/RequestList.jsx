@@ -25,14 +25,11 @@ const RequestList = ({ data, fetchTicket }) => {
     }
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
 
     const closeModal = () => {
         setIsModalOpen(false);
     };
-    const handleOpenModal = (url)=>{
+    const handleOpenModal = (url) => {
         setImageUrl(url);
         setIsModalOpen(true);
     }
@@ -46,15 +43,18 @@ const RequestList = ({ data, fetchTicket }) => {
                             {data.name}
                         </h2>
                         <h3 className="text-sm">
-                            {data.email}
+                            <span className='font-semibold'>Transaction Id:</span> {data.transactionId ? data.transactionId : ''}
                         </h3>
+                        <h4 className="text-sm">
+                            {data.email}
+                        </h4>
                     </div>
                     <div className="flex gap-1 items-center justify-center">
-                        <img onClick={()=>{handleOpenModal(data.screenshot)}} className='w-10 cursor-pointer rounded aspect-square' src={data.screenshot?data.screenshot:''} alt="Payment screenshot" />
-                        <img onClick={()=>{handleOpenModal(data.idCard)}} className='w-10 cursor-pointer rounded aspect-square' src={data.idCard?data.idCard:''} alt="ID Card" />
+                        <img onClick={() => { handleOpenModal(data.screenshot) }} className='w-10 cursor-pointer rounded aspect-square' src={data.screenshot ? data.screenshot : ''} alt="Payment screenshot" />
+                        <img onClick={() => { handleOpenModal(data.idCard) }} className='w-10 cursor-pointer rounded aspect-square' src={data.idCard ? data.idCard : ''} alt="ID Card" />
                         {
                             !processing &&
-                            <button onClick={() => { sendTicket(data.email) }} className="text-sm h-full bg-green-500 text-white px-2 py-1 rounded">Send</button>
+                            <button onClick={() => { sendTicket(data.email) }} className="text-sm h-10 bg-green-500 text-white px-2 py-1 rounded">Send</button>
                         }
                         {
                             processing &&
@@ -72,16 +72,32 @@ const RequestList = ({ data, fetchTicket }) => {
                                     className="absolute top-2 right-2 text-gray-700 hover:text-gray-900"
                                     onClick={closeModal}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        className="h-6 w-6"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        ></path>
                                     </svg>
                                 </button>
-                                <img src={imageUrl} alt="Payment Screenshot Image" />
+                                <img
+                                    src={imageUrl}
+                                    className='max-w-full max-h-screen mx-auto'
+                                    alt="Screenshot Image"
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             )}
+
         </>
     )
 }
