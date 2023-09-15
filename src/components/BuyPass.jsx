@@ -93,7 +93,7 @@ const BuyPass = () => {
             <Toaster position='top-right' />
             <header className='w-screen border-b p-4'>
                 <div className="container mx-auto">
-                    <a href="#" className="flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
+                    <a href="#" className="flex items-center text-2xl font-semibold text-gray-900  ">
                         <img className="w-36" src="https://www.tedxjmi.org/res/images/logos/light.png" alt="logo" />
                     </a>
                 </div>
@@ -108,11 +108,11 @@ const BuyPass = () => {
 
                         <form onSubmit={handleSubmit} className="space-y-4 w-full md:w-[450px] md:space-y-6 border p-4 rounded" action="#">
                             <div>
-                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900  ">Name</label>
                                 <input type="text" value={data.name} onChange={handleChange} name="name" id="name" placeholder="Your name" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" />
                             </div>
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900  ">Email</label>
                                 <input type="email" value={data.email} onChange={handleChange} name="email" id="email" placeholder="example@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                             </div>
                             <div className="flex gap-2 justify-start items-center">
@@ -124,11 +124,11 @@ const BuyPass = () => {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bank Name</label>
+                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900  ">Bank Name</label>
                                 <input type="text" value={"Indian Bank"} disabled name="bankname" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                             </div>
                             <div className='text-sm '>
-                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deposit the money into this account and share the screenshot below</label>
+                                <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900  ">Deposit the money into this account and share the screenshot below</label>
                                 <div className="w-full grid grid-cols-4">
                                     <div className='col-span-1 font-semibold'>
                                         Bank Name:
@@ -163,16 +163,16 @@ const BuyPass = () => {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                                <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 ">Price</label>
                                 <input type="email" value={jmiStudent ? '510' : '750'} disabled onChange={handleChange} name="email" id="email" placeholder="mohdusman.you@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                             </div>
                             <div>
-                                <label htmlFor="transactionId" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reference / Transaction id</label>
+                                <label htmlFor="transactionId" className="block mb-2 text-sm font-medium text-gray-900 ">Reference / Transaction id</label>
                                 <input type="text" onChange={handleChange} value={data.transactionId} name="transactionId" placeholder='xxxxxx' className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                             </div>
-                            <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white underline italic">Documents will be verified if any discrepancy found you will miss the opportunity.</label>
+                            <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900   underline italic">Documents will be verified if any discrepancy found you will miss the opportunity.</label>
                             <div>
-                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{jmiStudent ? "Student ID Card" : "Aadhar Card"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900  ">{jmiStudent ? "Student ID Card" : "Aadhar Card"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
                                 <input
                                     type="file"
                                     name="file"
@@ -182,7 +182,7 @@ const BuyPass = () => {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Screenshot {screenshotUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900  ">Payment Screenshot {screenshotUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
                                 <input
                                     type="file"
                                     name="file"
