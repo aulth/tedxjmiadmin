@@ -12,9 +12,9 @@ export default function App() {
         <meta name="keywords" content="TedX, Jmi, Tedx Jmi 2023" />
         <title>TEDxJMI - Buy Pass</title>
       </Head>
-    {/* <BuyPass/> */}
-    <h2>Please wait..</h2>
-    {/* <Footer/> */}
+    <BuyPass/>
+    {/* <h2>Please wait..</h2> */}
+    <Footer/>
     </>
   )
 }
