@@ -12,5 +12,10 @@ export default async function handler(req, res) {
         return res.json({ success: false, msg: "Tickets Not Found" })
     }
     tickets = tickets.filter(item=>!item.sent);
+    tickets = tickets.map((item)=>{
+        return {
+            "name":item.name, "email":item.email, "transactionId":item.transactionId, "idCard":item.idCard, "screenshot":item.screenshot
+        }
+    })
     return res.json({ success: true, msg: "Ticket Found", tickets: tickets })
 }
