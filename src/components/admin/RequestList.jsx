@@ -5,6 +5,7 @@ import Spinner from '../Spinner';
 const RequestList = ({ data, fetchTicket }) => {
     const [processing, setProcessing] = useState(false);
     const [imageUrl, setImageUrl] = useState(data.screenshot);
+    const [deleting, setDeleting] = useState(false)
     const sendTicket = async (email) => {
         setProcessing(true);
         const response = await fetch('/api/sendticket', {
@@ -16,6 +17,24 @@ const RequestList = ({ data, fetchTicket }) => {
         })
         const json = await response.json();
         setProcessing(false);
+        if (json.success) {
+            toast.success(json.msg);
+        } else {
+            toast.error(json.msg)
+        }
+        fetchTicket();
+    }
+    const deleteTicket = async (email) => {
+        setDeleting(true);
+        const response = await fetch('/api/deleteone', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+        })
+        const json = await response.json();
+        setDeleting(false);
         if (json.success) {
             toast.success(json.msg);
         } else {
@@ -52,6 +71,14 @@ const RequestList = ({ data, fetchTicket }) => {
                     <div className="flex gap-1 items-center justify-center">
                         <img onClick={() => { handleOpenModal(data.screenshot) }} className='w-10 cursor-pointer rounded aspect-square' src={data.screenshot ? data.screenshot : ''} alt="Payment screenshot" />
                         <img onClick={() => { handleOpenModal(data.idCard) }} className='w-10 cursor-pointer rounded aspect-square' src={data.idCard ? data.idCard : ''} alt="ID Card" />
+                        {
+                            !deleting &&
+                            <button onClick={() => { deleteTicket(data.email) }} className="text-sm h-10 bg-red-500 text-white px-2 py-1 rounded">Reject</button>
+                        }
+                        {
+                            deleting &&
+                            <Spinner />
+                        }
                         {
                             !processing &&
                             <button onClick={() => { sendTicket(data.email) }} className="text-sm h-10 bg-green-500 text-white px-2 py-1 rounded">Send</button>
