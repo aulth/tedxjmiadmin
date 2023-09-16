@@ -72,12 +72,31 @@ export default async function handler(req, res) {
             if (!newTicket) {
                 return res.json({ success: false, msg: "Purchase failed" })
             }
-            const message = `Thanks for the registration, we will review and send you the ticket shortly. Transaction id is ${data.transactionId}`
+            const message = `
+            <html>
+                <body style="background-color: #FFF; color: #000; font-family: Arial, sans-serif;">
+                    <p>Dear <b>${data.name}</b>,</p>
+                    <p>Thank you for registering for <b>TEDx JMI</b>, scheduled for September 23rd. We are excited to have you join our event!</p>
+                    
+                    <p>Please note that the registration pass will be sent to you as soon as we have successfully verified your documents. We understand the urgency, and we're working diligently to ensure this process is completed swiftly.</p>
+                    
+                    <p>We appreciate your enthusiasm and kindly ask you to keep a close watch on your inbox for your registration pass.</p>
+                    
+                    <p style="color: #FF4500; font-weight: bold;">Once again we extend our heartfelt gratitude for being a part of TEDx JMI, and we can't wait to share this incredible experience with you!</p>
+                    <br/>
+                    <p>Best regards,</p>
+                    <p style="font-weight:bold"><span style="color:#FF4500">Tedx</span>Jmi Organising team</p>
+                </body>
+            </html>
+        `;
+        
+
+
             const mailOption = {
                 from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
                 to: data.email.toLowerCase(),
                 subject: `Registration Acknowledgment`,
-                text: message
+                html: message
             };
             transporter.sendMail(mailOption, (err, info) => {
                 if (err) {
