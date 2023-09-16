@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import Spinner from './Spinner';
 
@@ -10,7 +10,8 @@ const BuyPass = () => {
     const [idCard, setIdCard] = useState('')
     const [buying, setBuying] = useState(false);
     const [jmiStudent, setJmiStudent] = useState(true);
-    const [success, setSuccess] = useState(false)
+    const [success, setSuccess] = useState(false);
+    const [soldOut, setSoldOut] = useState(false);
     const uploadScreenshot = async (e) => {
         e.preventDefault();
         if (typeof window !== 'undefined') {
@@ -88,6 +89,18 @@ const BuyPass = () => {
         setScreenshot('');
         setBuying(false);
     }
+    const fetchTicketCount = async()=>{
+        const response = await fetch("/api/getcount");
+        const json = await response.json();
+        if(json.count>=300){
+            setSoldOut(true);
+        }
+        
+    }
+    useEffect(() => {
+      fetchTicketCount();
+    }, [])
+    
     return (
         <>
             <Toaster position='top-right' />
@@ -99,7 +112,7 @@ const BuyPass = () => {
                 </div>
             </header>
             {
-                !success &&
+                !success && !soldOut &&
                 <>
                     <h2 className="text-xl font-bold text-center mt-4">
                         Buy <span className='text-red-500'>TEDx</span>JMI Pass
@@ -203,7 +216,7 @@ const BuyPass = () => {
                 </>
             }
             {
-                success &&
+                success && !soldOut &&
                 <div className="container flex justify-center items-center p-4 mx-auto">
                     <div className="space-y-2 w-full md:w-[450px]   p-4 rounded">
                         <h2 className="font-bold text-xl text-center text-green-500">Thanks! for Registering</h2>
@@ -211,6 +224,15 @@ const BuyPass = () => {
                     </div>
                 </div>
             }
+            {
+                soldOut &&
+                <div className="container flex justify-center items-center p-4 mx-auto">
+                    <div className="space-y-2 w-full md:w-[450px]   p-4 rounded">
+                        <h2 className="font-bold text-xl text-center text-red-500 underline">Passes Sold Out</h2>
+                    </div>
+                </div>
+            }
+
         </>
     )
 }
