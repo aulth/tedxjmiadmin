@@ -105,10 +105,14 @@ const BuyPass = () => {
         <>
             <Toaster position='top-right' />
             <header className='w-screen border-b p-4'>
-                <div className="container mx-auto">
+                <div className="container mx-auto flex justify-between items-center">
                     <a href="#" className="flex items-center text-2xl font-semibold text-gray-900  ">
                         <img className="w-36" src="https://www.tedxjmi.org/res/images/logos/light.png" alt="logo" />
                     </a>
+                    <div className='mr-2 flex flex-col justify-center items-end'>
+                    <h3 className="font-semibold text-sm">Contact for pass query</h3>
+                    <a href='tel:+919839872992' className="font-semibold text-sm text-red-500 underline">+91 9839872992</a>
+                    </div>
                 </div>
             </header>
             {
