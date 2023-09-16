@@ -58,7 +58,7 @@ export default async function handler(req, res) {
                                                 <td
                                                     style="font-size:14px;font-weight:700;line-height:23px;text-align:center;padding:13px 10px 25px;">
                                                     Thank you for registering for <b style="color:red">TEDx<span
-                                                            class="il">JMI</span>.</b><br>Your entrance
+                                                            class="il">JMI</span>.</b><br>Your registeration
                                                     pass is here</td>
                                             </tr>
                                             <tr>
