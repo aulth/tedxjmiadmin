@@ -13,7 +13,7 @@ export default function App() {
         <title>TEDxJMI - Ticket Reuqests</title>
       </Head>
     <Requests/>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }

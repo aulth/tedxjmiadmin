@@ -13,7 +13,7 @@ export default function App() {
         <title>TEDxJMI - Buy Pass</title>
       </Head>
     <BuyPass/>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }
