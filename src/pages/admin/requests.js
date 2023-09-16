@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Requests from "@/components/admin/Requests";
 import Head from "next/head";
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <title>TEDxJMI - Ticket Reuqests</title>
       </Head>
     <Requests/>
+    <Footer/>
     </>
   )
 }

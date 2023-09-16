@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Home from "@/components/admin/Home";
 import Head from "next/head";
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <title>TEDxJMI - Verify Ticket</title>
       </Head>
     <Home/>
+    <Footer/>
     </>
   )
 }

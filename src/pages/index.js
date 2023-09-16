@@ -1,4 +1,5 @@
 import BuyPass from "@/components/BuyPass";
+import Footer from "@/components/Footer";
 import Head from "next/head";
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <title>TEDxJMI - Buy Pass</title>
       </Head>
     <BuyPass/>
+    <Footer/>
     </>
   )
 }
