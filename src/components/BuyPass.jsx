@@ -181,21 +181,23 @@ const BuyPass = () => {
                             </div>
                             <label htmlFor="notice" className="block mb-2 text-sm font-medium text-gray-900   underline italic">If we find any discrepancy in the details filled by you, your entry will be deemed invalid and your money will not be returned.</label>
                             <div>
-                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900  ">{jmiStudent ? "Student ID Card" : "Govt. ID (Aadhar, PAN, etc.)"} {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <label htmlFor="id" className="block mb-2 text-sm font-medium text-gray-900  ">{jmiStudent ? "Student ID Card" : "Govt. ID (Aadhar, PAN, etc.)"} <span className='text-xs'>(.jpg/.png)</span> {idCardUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
                                 <input
                                     type="file"
                                     name="file"
                                     id="id"
+                                    accept="image/jpeg, image/png"
                                     onChange={uploadIdCard}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                 />
                             </div>
                             <div>
-                                <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900  ">Payment Screenshot {screenshotUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
+                                <label htmlFor="file" className="block mb-2 text-sm font-medium text-gray-900  ">Payment Screenshot <span className='text-xs'>(.jpg/.png)</span> {screenshotUploading && <span className='text-green-500 text-xs'>Uploading..</span>}</label>
                                 <input
                                     type="file"
                                     name="file"
                                     id="file"
+                                    accept="image/jpeg, image/png"
                                     onChange={uploadScreenshot}
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 />
