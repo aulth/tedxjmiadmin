@@ -223,7 +223,7 @@ const BuyPass = () => {
             }
             {
                 success && !soldOut &&
-                <div className="container flex justify-center items-center p-4 mx-auto">
+                <div className="container  h-screen flex justify-center items-start p-4 mx-auto">
                     <div className="space-y-2 w-full md:w-[450px]   p-4 rounded">
                         <h2 className="font-bold text-xl text-center text-green-500">Thanks! for Registering</h2>
                         <h3 className="font-semibold text-center">You will receive your pass shortly.</h3>
@@ -232,7 +232,7 @@ const BuyPass = () => {
             }
             {
                 soldOut &&
-                <div className="container flex justify-center items-center p-4 mx-auto">
+                <div className="container h-screen flex justify-center items-start p-4 mx-auto">
                     <div className="space-y-2 w-full md:w-[450px]   p-4 rounded">
                         <h2 className="font-bold text-xl text-center text-red-500 underline">Passes Sold Out</h2>
                     </div>
