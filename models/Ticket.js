@@ -23,7 +23,8 @@ const Ticket = new mongoose.Schema({
     },
     screenshot: String,
     idCard: String,
-    transactionId: String
+    transactionId: String,
+    mobile: String
 }, { timestamps: true })
 
 mongoose.models = {};

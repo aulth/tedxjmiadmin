@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 const BuyPass = () => {
     const [screenshotUploading, setScreenshotUploading] = useState(false);
     const [idCardUploading, setIdCardUploading] = useState(false)
-    const [data, setData] = useState({ name: "", email: "" });
+    const [data, setData] = useState({ name: "", email: "", mobile:"", transactionId:"" });
     const [screenshot, setScreenshot] = useState('');
     const [idCard, setIdCard] = useState('')
     const [buying, setBuying] = useState(false);
@@ -59,6 +59,9 @@ const BuyPass = () => {
         if (!data.email) {
             return toast.error('Please enter your email');
         }
+        if (!data.mobile) {
+            return toast.error('Mobile no is missing');
+        }
         if (!data.transactionId) {
             return toast.error('Please enter transaction id');
         }
@@ -75,7 +78,7 @@ const BuyPass = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: data.name, email: data.email, screenshot: screenshot, idCard: idCard, transactionId: data.transactionId, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+            body: JSON.stringify({ name: data.name, email: data.email, screenshot: screenshot, idCard: idCard, transactionId: data.transactionId, mobile:data.mobile, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
         })
         const json = await response.json();
         if (json.success) {
@@ -85,7 +88,7 @@ const BuyPass = () => {
             setSuccess(false)
             toast.error(json.msg);
         }
-        setData({ name: "", email: "", transactionId: "" })
+        setData({ name: "", email: "", transactionId: "", mobile:"" })
         setScreenshot('');
         setBuying(false);
     }
@@ -131,6 +134,10 @@ const BuyPass = () => {
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900  ">Email</label>
                                 <input type="email" value={data.email} onChange={handleChange} name="email" id="email" placeholder="example@gmail.com" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
+                            </div>
+                            <div>
+                                <label htmlFor="mobile" className="block mb-2 text-sm font-medium text-gray-900  ">Mobile No</label>
+                                <input type="tel" value={data.mobile} onChange={handleChange} name="mobile" id="mobile" placeholder="Your mobile number" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " />
                             </div>
                             <div className="flex gap-2 justify-start items-center">
                                 <div className={`${jmiStudent ? 'bg-red-500' : ""} p-0.5 rounded`}>

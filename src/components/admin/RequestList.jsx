@@ -6,6 +6,7 @@ const RequestList = ({ data, fetchTicket }) => {
     const [processing, setProcessing] = useState(false);
     const [imageUrl, setImageUrl] = useState(data.screenshot);
     const [deleting, setDeleting] = useState(false)
+    console.log(data)
     const sendTicket = async (email) => {
         setProcessing(true);
         const response = await fetch('/api/sendticket', {
@@ -62,7 +63,10 @@ const RequestList = ({ data, fetchTicket }) => {
                             {data.name}
                         </h2>
                         <h3 className="text-sm">
-                            <span className='font-semibold'>Transaction Id:</span> {data.transactionId ? data.transactionId : ''}
+                            <span className='font-semibold'>Txn Id:</span> {data.transactionId ? data.transactionId : ''}
+                        </h3>
+                        <h3 className="text-sm">
+                            <span className='font-semibold'>Mobile:</span> {data.mobile ? data.mobile : ''}
                         </h3>
                         <h4 className="text-sm">
                             {data.email}
