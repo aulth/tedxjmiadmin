@@ -42,7 +42,7 @@ const QrScanner = () => {
     };
     return (
         <>
-            <div className="w-full h-screen p-8">
+            <div className="w-full h-[calc(100vh-36.67px)] p-8">
                 <h2 className="text-center text-lg font-bold text-red-500 my-4">{data}</h2>
                 <h2 className="text-center text-lg font-bold text-red-500 my-4">{name}</h2>
                 <div className="w-52 relative mx-auto rounded-full">

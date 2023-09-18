@@ -11,10 +11,10 @@ export default async function handler(req, res) {
     if (process.env.adminPin != data.adminPin) {
         return res.json({ success: false, msg: "Unauthorized" })
     }
-    let tickets = await Ticket.findOneAndDelete({ email: data.email });
+    let tickets = await Ticket.findOneAndUpdate({ email: data.email }, {rejected:true});
     if (!tickets) {
-        return res.json({ success: false, msg: "Deletion failed" })
+        return res.json({ success: false, msg: "Rejection failed" })
     }
     //update the used attr
-    return res.json({ success: true, msg: "Deleted Successfully" })
+    return res.json({ success: true, msg: "Rejected Successfully" })
 }

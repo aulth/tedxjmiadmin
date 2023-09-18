@@ -24,7 +24,11 @@ const Ticket = new mongoose.Schema({
     screenshot: String,
     idCard: String,
     transactionId: String,
-    mobile: String
+    mobile: String,
+    rejected:{
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true })
 
 mongoose.models = {};

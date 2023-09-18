@@ -20,7 +20,7 @@ const Login = ({login, setLogin}) => {
     }
     return (
         <>
-            <section className="bg-gray-50 h-screen dark:bg-gray-900">
+            <section className="bg-gray-50 h-[calc(100vh-36.67px)] dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                         <img className="w-32" src="https://www.tedxjmi.org/res/images/logos/light.png" alt="logo" />
