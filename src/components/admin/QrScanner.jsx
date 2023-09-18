@@ -5,6 +5,7 @@ const QrScanner = () => {
     const [startScan, setStartScan] = useState(true);
     const [data, setData] = useState("");
     const [name, setName] = useState("");
+    const [valid, setValid] = useState("true");
     const playAlarmSound = () => {
         const audio = new Audio('/alarm.mp3');
         audio.play();
@@ -32,7 +33,9 @@ const QrScanner = () => {
             const json = await response.json();
             if (json.success) {
                 setName(json.name);
+                setValid(true);
             } else {
+                setValid(false);
                 setName(json.msg);
             }
         } catch (error) {
@@ -45,6 +48,10 @@ const QrScanner = () => {
             <div className="w-full h-[calc(100vh-36.67px)] p-8">
                 <h2 className="text-center text-lg font-bold text-red-500 my-4">{data}</h2>
                 <h2 className="text-center text-lg font-bold text-red-500 my-4">{name}</h2>
+                {
+                    name &&
+                    <img className="mx-auto w-24 aspect-square" src={valid?"https://img.icons8.com/emoji/96/check-mark-emoji.png":"https://img.icons8.com/color/96/delete-sign--v1.png"} alt="status" />
+                }
                 <div className="w-52 relative mx-auto rounded-full">
                     {startScan && (
                         <div className="relative w-full h-full">
@@ -71,7 +78,7 @@ const QrScanner = () => {
                 </div>
                 <div className="flex justify-center mt-4">
                     {
-                        data &&
+                        name &&
                         <button onClick={handleReset} className="rounded-full px-4 py-2 bg-gray-200 hover:bg-gray-300 focus:outline-none">
                             Reset
                         </button>
