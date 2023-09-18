@@ -43,18 +43,37 @@ export default async function handler(req, res) {
         //     return res.json({success:false, msg:"Unathorized"});
         // }
         try {
+            if(!data.email){
+                return res.json({ success: false, msg: "Email missing", data })
+            }
             const ifExist = await Ticket.findOne({email:data.email.toLowerCase()});
             if(ifExist){
                 return res.json({ success: false, msg: "Email already used", data })
             }
             const ticketNumber = generateTicket();
-
+            data.adminPin = "";
+            if(!data.name){
+                return res.json({ success: false, msg: "Name missing", data })
+            }
+            if(!data.screenshot){
+                return res.json({ success: false, msg: "Payment Screenshot missing", data })
+            }
+            if(!data.idCard){
+                return res.json({ success: false, msg: "ID missing", data })
+            }
+            if(!data.mobile){
+                return res.json({ success: false, msg: "Mobile No missing", data })
+            }
             const newTicket = await Ticket.create({
                 ticketNumber: ticketNumber,
                 name: data.name,
                 email: data.email,
                 used:false,
-                sent:true
+                sent:true,
+                screenshot: data.screenshot,
+                idCard: data.idCard,
+                transactionId: data.transactionId,
+                mobile:data.mobile
             })
             if (!newTicket) {
                 return res.json({ success: false, msg: "Booking failed", data })

@@ -11,7 +11,7 @@ const sendticket = () => {
         <meta name="keywords" content="TedX, Jmi, Tedx Jmi 2023" />
         <title>TEDxJMI - Send Ticket</title>
       </Head>
-    {/* <SendBulkTicket/> */}
+    <SendBulkTicket/>
     </>
   )
 }

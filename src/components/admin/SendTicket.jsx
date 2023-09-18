@@ -44,7 +44,7 @@ function ExcelUploader() {
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify({ email: excelData[i].email, name: excelData[i].name, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+                    body: JSON.stringify({ email: excelData[i].email, name: excelData[i].name, screenshot: excelData[i].screenshot, idCard: excelData[i].idCard, transactionId: excelData[i].transactionId, mobile:excelData[i].mobile, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
                 })
                 let json = await response.json();
                 setResponses(prev => [...prev, json]);
