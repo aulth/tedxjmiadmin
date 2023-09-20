@@ -141,11 +141,11 @@ const BuyPass = () => {
                             </div>
                             <div className="flex gap-2 justify-start items-center">
                                 <div className={`${jmiStudent ? 'bg-red-500' : ""} p-0.5 rounded`}>
-                                    <button onClick={() => { setJmiStudent(true) }} type='button' className="px-2 py-1 border-2 border-white bg-red-500 rounded-sm text-white text-sm font-semibold">JMI Student</button>
+                                    <button onClick={() => { setJmiStudent(true) }} type='button' className="px-2 py-1 border-2 border-white bg-red-500 rounded-sm text-white text-sm font-semibold">Only for JMI Student</button>
                                 </div>
-                                <div className={`${!jmiStudent ? 'bg-black' : ""} p-0.5 rounded`}>
+                                {/* <div className={`${!jmiStudent ? 'bg-black' : ""} p-0.5 rounded`}>
                                     <button onClick={() => { setJmiStudent(false) }} type='button' className="px-2 py-1 border-2 border-white bg-black rounded-sm text-white text-sm font-semibold">Non-JMI</button>
-                                </div>
+                                </div> */}
                             </div>
                             <div className='text-sm '>
                                 <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900  ">Deposit the money into this account and share the screenshot below</label>
