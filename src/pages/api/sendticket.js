@@ -80,6 +80,7 @@ export default async function handler(req, res) {
                                                                 style="text-align: center;font-weight: bold;font-size: large;color: red;">
                                                                 ${ticket.name}</h3>
                                                             <p style="text-align: center;">23 September 2023</p>
+                                                            <p style="text-align: center;">Entry Time: 8:30 to 11:00 AM</p>
                                                             <p style="text-align: center;">M.A. Ansari Auditorium, Jamia
                                                                 Millia Islamia, New Delhi - India</p>
                                                             <p style="text-align: center;font-size: x-small;">Single

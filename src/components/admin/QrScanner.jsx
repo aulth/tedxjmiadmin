@@ -23,6 +23,15 @@ const QrScanner = () => {
         setData("");
         setName("");
     }
+    const sendSchedule = async(email)=>{
+        const response = await fetch('/api/sendschedule', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify({ email: email, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+        })
+    }
     const handleVerify = async (number) => {
         try {
             const response = await fetch('/api/getone', {
@@ -34,6 +43,7 @@ const QrScanner = () => {
             if (json.success) {
                 setName(json.name);
                 setValid(true);
+                sendSchedule(json.email)
             } else {
                 setValid(false);
                 setName(json.msg);
@@ -50,7 +60,7 @@ const QrScanner = () => {
                 <h2 className="text-center text-lg font-bold text-red-500 my-4">{name}</h2>
                 {
                     name &&
-                    <img className="mx-auto w-24 aspect-square" src={valid?"https://img.icons8.com/emoji/96/check-mark-emoji.png":"https://img.icons8.com/color/96/delete-sign--v1.png"} alt="status" />
+                    <img className="mx-auto w-24 aspect-square" src={valid?"/images/checked.png":"/images/invalid.png"} alt="status" />
                 }
                 <div className="w-52 relative mx-auto rounded-full">
                     {startScan && (
