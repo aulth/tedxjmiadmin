@@ -46,24 +46,24 @@ export default async function handler(req, res) {
                     <th style="border:1px solid #dddddd;text-align:left;padding:8px">Event</th>
                 </tr>
                 <tr>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">09:00 AM - 10:30 AM</td>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">Opening Ceremony</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">08:30 AM - 11:00 AM</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">Entry</td>
                 </tr>
                 <tr>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">10:45 AM - 12:30 PM</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">10:00 AM - 01:00 PM</td>
                     <td style="border:1px solid #dddddd;text-align:left;padding:8px">Morning Sessions</td>
                 </tr>
                 <tr>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">12:30 PM - 01:30 PM</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">01:00 PM - 02:00 PM</td>
                     <td style="border:1px solid #dddddd;text-align:left;padding:8px">Lunch</td>
                 </tr>
                 <tr>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">01:45 PM - 03:30 PM</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">02:00 PM - 05:00 PM</td>
                     <td style="border:1px solid #dddddd;text-align:left;padding:8px">Afternoon Sessions</td>
                 </tr>
                 <tr>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">03:45 PM - 05:00 PM</td>
-                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">Closing Remarks</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">05:00 PM</td>
+                    <td style="border:1px solid #dddddd;text-align:left;padding:8px">Closing Ceremony</td>
                 </tr>
             </tbody></table>
             <p>We hope you enjoy the day's events. If you have any questions or need assistance, please don't hesitate to ask.</p>
@@ -73,8 +73,10 @@ export default async function handler(req, res) {
             const mailOption = {
                 from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
                 to: ticket.email.toLowerCase(),
-                subject: `Schedule For The Day`,
-                html: message
+                subject: `Itinerary For The Day`,
+                html: message,
+                attachments: [
+                    { path:  "https://www.africau.edu/images/default/sample.pdf"}]
             };
             transporter.sendMail(mailOption, (err, info) => {
                 if (err) {

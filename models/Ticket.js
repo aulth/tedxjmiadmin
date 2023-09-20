@@ -28,6 +28,10 @@ const Ticket = new mongoose.Schema({
     rejected:{
         type: Boolean,
         default: false
+    },
+    campusAmbassador:{
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true })
 

@@ -73,7 +73,8 @@ export default async function handler(req, res) {
                 screenshot: data.screenshot,
                 idCard: data.idCard,
                 transactionId: data.transactionId,
-                mobile:data.mobile
+                mobile:data.mobile,
+                campusAmbassador:true
             })
             if (!newTicket) {
                 return res.json({ success: false, msg: "Booking failed", data })
