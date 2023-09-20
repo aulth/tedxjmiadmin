@@ -72,7 +72,7 @@ export default async function handler(req, res) {
         `
             const mailOption = {
                 from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
-                to: data.email.toLowerCase(),
+                to: ticket.email.toLowerCase(),
                 subject: `Schedule - TEDxJMI`,
                 html: message
             };
