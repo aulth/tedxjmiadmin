@@ -26,5 +26,5 @@ export default async function handler(req, res) {
     }
     //update the used attr
     await Ticket.findOneAndUpdate({ticketNumber:data.ticketNumber},{used:true});
-    return res.json({ success: true, msg: "Ticket Found", name: tickets.name })
+    return res.json({ success: true, msg: "Ticket Found", name: tickets.name, email:tickets.email })
 }

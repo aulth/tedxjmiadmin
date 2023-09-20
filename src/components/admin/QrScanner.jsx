@@ -31,6 +31,7 @@ const QrScanner = () => {
             },
             body: JSON.stringify({ email: email, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
         })
+        const json = await response.json();
     }
     const handleVerify = async (number) => {
         try {

@@ -6,7 +6,6 @@ const RequestList = ({ data, fetchTicket }) => {
     const [processing, setProcessing] = useState(false);
     const [imageUrl, setImageUrl] = useState(data.screenshot);
     const [deleting, setDeleting] = useState(false)
-    console.log(data)
     const sendTicket = async (email) => {
         setProcessing(true);
         const response = await fetch('/api/sendticket', {
