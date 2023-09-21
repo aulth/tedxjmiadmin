@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     tickets = tickets.filter(item=>!item.sent && !item.rejected);
     tickets = tickets.map((item)=>{
         return {
-            "name":item.name, "email":item.email, "transactionId":item.transactionId, "idCard":item.idCard, "screenshot":item.screenshot, "mobile":item.mobile
+            "name":item.name, "email":item.email, "transactionId":item.transactionId, "idCard":item.idCard, "screenshot":item.screenshot, "mobile":item.mobile, "designation":item.designation
         }
     })
     return res.json({ success: true, msg: "Ticket Found", tickets: tickets })

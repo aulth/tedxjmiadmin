@@ -68,7 +68,8 @@ export default async function handler(req, res) {
                 screenshot: data.screenshot,
                 idCard: data.idCard,
                 transactionId: data.transactionId,
-                mobile:data.mobile
+                mobile:data.mobile,
+                designation:data.designation
             })
             if (!newTicket) {
                 return res.json({ success: false, msg: "Purchase failed" })

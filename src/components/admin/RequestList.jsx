@@ -59,7 +59,7 @@ const RequestList = ({ data, fetchTicket }) => {
                 <div className="w-full flex justify-between">
                     <div className="flex flex-col items-start">
                         <h2 className="text-sm font-semibold">
-                            {data.name}
+                            {data.name} <span className='text-xs font-normal'>{data.designation? " | " +data.designation:""}</span>
                         </h2>
                         <h3 className="text-sm">
                             <span className='font-semibold'>Txn Id:</span> {data.transactionId ? data.transactionId : ''}

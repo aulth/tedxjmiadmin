@@ -32,7 +32,8 @@ const Ticket = new mongoose.Schema({
     campusAmbassador:{
         type: Boolean,
         default: false
-    }
+    },
+    designation:String
 }, { timestamps: true })
 
 mongoose.models = {};

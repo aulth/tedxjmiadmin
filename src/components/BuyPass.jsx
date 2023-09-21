@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 const BuyPass = () => {
     const [screenshotUploading, setScreenshotUploading] = useState(false);
     const [idCardUploading, setIdCardUploading] = useState(false)
-    const [data, setData] = useState({ name: "", email: "", mobile:"", transactionId:"" });
+    const [data, setData] = useState({ name: "", email: "", mobile: "", transactionId: "", designation:"" });
     const [screenshot, setScreenshot] = useState('');
     const [idCard, setIdCard] = useState('')
     const [buying, setBuying] = useState(false);
@@ -62,6 +62,9 @@ const BuyPass = () => {
         if (!data.mobile) {
             return toast.error('Mobile no is missing');
         }
+        if (!data.designation) {
+            return toast.error('Please select your designation');
+        }
         if (!data.transactionId) {
             return toast.error('Please enter transaction id');
         }
@@ -78,7 +81,7 @@ const BuyPass = () => {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ name: data.name, email: data.email, screenshot: screenshot, idCard: idCard, transactionId: data.transactionId, mobile:data.mobile, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
+            body: JSON.stringify({ name: data.name, email: data.email, screenshot: screenshot, idCard: idCard, transactionId: data.transactionId, mobile: data.mobile, designation:data.designation, adminPin: process.env.NEXT_PUBLIC_ADMIN_PIN })
         })
         const json = await response.json();
         if (json.success) {
@@ -88,22 +91,22 @@ const BuyPass = () => {
             setSuccess(false)
             toast.error(json.msg);
         }
-        setData({ name: "", email: "", transactionId: "", mobile:"" })
+        setData({ name: "", email: "", transactionId: "", mobile: "" })
         setScreenshot('');
         setBuying(false);
     }
-    const fetchTicketCount = async()=>{
+    const fetchTicketCount = async () => {
         const response = await fetch("/api/getcount");
         const json = await response.json();
-        if(json.count>=300){
+        if (json.count >= 300) {
             setSoldOut(true);
         }
-        
+
     }
     useEffect(() => {
-      fetchTicketCount();
+        fetchTicketCount();
     }, [])
-    
+
     return (
         <>
             <Toaster position='top-right' />
@@ -113,8 +116,8 @@ const BuyPass = () => {
                         <img className="w-36" src="https://www.tedxjmi.org/res/images/logos/light.png" alt="logo" />
                     </a>
                     <div className='mr-2 flex flex-col justify-center items-end'>
-                    <h3 className="font-semibold text-sm">Contact for pass query</h3>
-                    <a href='tel:+919839872992' className="font-semibold text-sm text-red-500 underline">+91 9839872992</a>
+                        <h3 className="font-semibold text-sm">Contact for pass query</h3>
+                        <a href='tel:+919839872992' className="font-semibold text-sm text-red-500 underline">+91 9839872992</a>
                     </div>
                 </div>
             </header>
@@ -141,12 +144,23 @@ const BuyPass = () => {
                             </div>
                             <div className="flex gap-2 justify-start items-center">
                                 <div className={`${jmiStudent ? 'bg-red-500' : ""} p-0.5 rounded`}>
-                                    <button onClick={() => { setJmiStudent(true) }} type='button' className="px-2 py-1 border-2 border-white bg-red-500 rounded-sm text-white text-sm font-semibold">Only for JMI Student</button>
+                                    <button onClick={() => { setJmiStudent(true) }} type='button' className="px-2 py-1 border-2 border-white bg-red-500 rounded-sm text-white text-sm font-semibold">JMI Student/Alumni/Employee</button>
                                 </div>
                                 {/* <div className={`${!jmiStudent ? 'bg-black' : ""} p-0.5 rounded`}>
                                     <button onClick={() => { setJmiStudent(false) }} type='button' className="px-2 py-1 border-2 border-white bg-black rounded-sm text-white text-sm font-semibold">Non-JMI</button>
                                 </div> */}
                             </div>
+                            { jmiStudent &&
+                                <div>
+                                    <label htmlFor="designation" className="block mb-2 text-sm font-medium text-gray-900  ">Designation</label>
+                                    <select value={data.designation} required onChange={handleChange}  name="designation" id="designation" className='bg-gray-50 border cursor-pointer border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 '>
+                                        <option value="">Select Designation</option>
+                                        <option value="Student">Student</option>
+                                        <option value="Alumni">Alumni</option>
+                                        <option value="Employee">Employee</option>
+                                    </select>
+                                </div>
+                            }
                             <div className='text-sm '>
                                 <label htmlFor="bankname" className="block mb-2 text-sm font-medium text-gray-900  ">Deposit the money into this account and share the screenshot below</label>
                                 <div className="w-full grid grid-cols-4">
