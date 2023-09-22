@@ -67,7 +67,7 @@ export default async function handler(req, res) {
             const newTicket = await Ticket.create({
                 ticketNumber: ticketNumber,
                 name: data.name,
-                email: data.email,
+                email: data.email.toLowerCase(),
                 used:false,
                 sent:true,
                 screenshot: data.screenshot,

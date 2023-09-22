@@ -25,6 +25,10 @@ export default async function handler(req, res) {
         return res.json({ success: false, msg: "Already used" })
     }
     //update the used attr
-    await Ticket.findOneAndUpdate({ticketNumber:data.ticketNumber},{used:true});
+    // await Ticket.findOneAndUpdate({ticketNumber:data.ticketNumber},{used:true});
+    await Ticket.updateMany(
+        { email: { $regex: new RegExp('^' + tickets.email + '$', 'i') } },
+        { used: true }
+      );      
     return res.json({ success: true, msg: "Ticket Found", name: tickets.name, email:tickets.email })
 }

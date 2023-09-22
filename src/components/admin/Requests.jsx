@@ -9,6 +9,7 @@ const Requests = () => {
   const [tickets, setTickets] = useState();
   const [responses, setResponses] = useState([]);
   const [sendingAll, setSendingAll] = useState(false)
+  const [counter, setCounter] = useState(0);
   const fetchTicket = async () => {
     const response = await fetch('/api/getallrequest', {
       method: 'POST',
@@ -35,6 +36,7 @@ const Requests = () => {
       })
       const json = await response.json();
       setResponses(prev => [...prev, json]);
+      setCounter(prev=>prev+1)
       if (json.success) {
         toast.success(json.msg);
       } else {
@@ -55,6 +57,10 @@ const Requests = () => {
                 <img className="w-32" src="https://www.tedxjmi.org/res/images/logos/light.png" alt="logo" />
               </a>
               <h2 className="text-center font-bold">Pass Request - <span className='text-red-500'>{tickets && tickets.length}</span></h2>
+              {
+                counter>0 &&
+                <h2 className="text-center font-bold">Passes Sent - <span className='text-red-500'>{counter}</span></h2>
+              }
               {
                 !sendingAll &&
                 <button onClick={() => { sendAll(tickets) }} className="px-4 py-2 bg-green-500 rounded text-white my-4">Send All</button>
