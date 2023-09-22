@@ -36,7 +36,7 @@ const SendSingleTicket = () => {
     <>
       <Toaster position='top-right' />
       {
-        !login &&
+        login &&
         <>
           <div className="container mx-auto h-screen flex justify-center items-center">
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
