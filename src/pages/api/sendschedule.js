@@ -32,7 +32,10 @@ export default async function handler(req, res) {
         //     return res.json({success:false, msg:"Unathorized"});
         // }
         try {
-            const ticket = await Ticket.findOne({email:data.email});
+            // const ticket = await Ticket.findOne({email:data.email});
+            const ticket = await Ticket.findOne({
+                email: { $regex: new RegExp('^' + data.email + '$', 'i') }
+              });
             const message = `    
             <div style="font-family:Arial,sans-serif;padding:4px"><div style="text-align:center;background-color:red;color:#fff;padding:10px"><div class="adM">
             </div><h1>Welcome to TEDxJMI</h1>
@@ -76,7 +79,7 @@ export default async function handler(req, res) {
                 subject: `Itinerary For The Day`,
                 html: message,
                 attachments: [
-                    { path:  "https://www.africau.edu/images/default/sample.pdf"}]
+                    { path:  "https://register.tedxjmi.org/TEDXJMI%202023%20ITINERARY_20230922_203055_0000.pdf"}]
             };
             transporter.sendMail(mailOption, (err, info) => {
                 if (err) {
