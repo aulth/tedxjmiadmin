@@ -29,7 +29,7 @@ const Ticket = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    campusAmbassador:{
+    googleForm:{
         type: Boolean,
         default: false
     },

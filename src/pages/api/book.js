@@ -61,9 +61,9 @@ export default async function handler(req, res) {
             if(!data.idCard){
                 return res.json({ success: false, msg: "ID missing", data })
             }
-            if(!data.mobile){
-                return res.json({ success: false, msg: "Mobile No missing", data })
-            }
+            // if(!data.mobile){
+            //     return res.json({ success: false, msg: "Mobile No missing", data })
+            // }
             const newTicket = await Ticket.create({
                 ticketNumber: ticketNumber,
                 name: data.name,
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
                 idCard: data.idCard,
                 transactionId: data.transactionId,
                 mobile:data.mobile,
-                campusAmbassador:true
+                googleForm:true
             })
             if (!newTicket) {
                 return res.json({ success: false, msg: "Booking failed", data })
