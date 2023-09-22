@@ -58,9 +58,9 @@ export default async function handler(req, res) {
             if(!data.screenshot){
                 return res.json({ success: false, msg: "Payment Screenshot missing", data })
             }
-            if(!data.idCard){
-                return res.json({ success: false, msg: "ID missing", data })
-            }
+            // if(!data.idCard){
+            //     return res.json({ success: false, msg: "ID missing", data })
+            // }
             // if(!data.mobile){
             //     return res.json({ success: false, msg: "Mobile No missing", data })
             // }

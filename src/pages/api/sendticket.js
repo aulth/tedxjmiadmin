@@ -22,15 +22,13 @@ const corsHandler = cors({
 export default async function handler(req, res) {
     corsHandler(req, res, async () => {
         // Handle the API request here
+        console.log("sendticket api hitted")
         const data = req.body;
         if(data.adminPin!=process.env.adminPin){
             return res.json({success:false, msg:"Unauthorized"})
         }
         const origin = req.headers['origin'];
         const allowedOrign = ['https://www.tedxjmi.org', 'http://127.0.0.1:5500',]
-        // if(!allowedOrign.includes(origin)){
-        //     return res.json({success:false, msg:"Unathorized"});
-        // }
         try {
             const ticket = await Ticket.findOneAndUpdate({email:data.email.toLowerCase()}, {sent:true});
             const message = `    
@@ -161,7 +159,7 @@ export default async function handler(req, res) {
         } catch (error) {
             return res.json({ success: false, msg: error.message, data })
         }
-        // res.status(200).json({ name: 'John Doe' });
+        res.status(200).json({ name: 'John Doe' });
     });
 
 }
