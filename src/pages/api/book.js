@@ -46,7 +46,11 @@ export default async function handler(req, res) {
             if(!data.email){
                 return res.json({ success: false, msg: "Email missing", data })
             }
-            const ifExist = await Ticket.findOne({email:data.email.toLowerCase()});
+            // const ifExist = await Ticket.findOne({email:data.email.toLowerCase()});
+            const ifExist = await Ticket.findOne({
+                email: { $regex: new RegExp('^' + data.email + '$', 'i') }
+              });
+              
             if(ifExist){
                 return res.json({ success: false, msg: "Email already used", data })
             }

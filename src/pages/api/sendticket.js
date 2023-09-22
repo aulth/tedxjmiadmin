@@ -24,13 +24,20 @@ export default async function handler(req, res) {
         // Handle the API request here
         console.log("sendticket api hitted")
         const data = req.body;
-        if(data.adminPin!=process.env.adminPin){
-            return res.json({success:false, msg:"Unauthorized"})
+        if (data.adminPin != process.env.adminPin) {
+            return res.json({ success: false, msg: "Unauthorized" })
         }
         const origin = req.headers['origin'];
         const allowedOrign = ['https://www.tedxjmi.org', 'http://127.0.0.1:5500',]
         try {
-            const ticket = await Ticket.findOneAndUpdate({email:data.email.toLowerCase()}, {sent:true});
+            // const ticket = await Ticket.findOneAndUpdate({email:data.email.toLowerCase()}, {sent:true});
+            const ticket = await Ticket.findOneAndUpdate(
+                { email: { $regex: new RegExp('^' + data.email + '$', 'i') } },
+                { sent: true }
+            );
+            if (!ticket) {
+                return res.json({ success: false, msg: "Invalid email" })
+            }
             const message = `    
         <div style="margin:0px;padding:0px">
     <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%"
@@ -159,7 +166,7 @@ export default async function handler(req, res) {
         } catch (error) {
             return res.json({ success: false, msg: error.message, data })
         }
-        
+
     });
 
 }
