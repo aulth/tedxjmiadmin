@@ -41,6 +41,8 @@ const Requests = () => {
         toast.error(json.msg)
       }
     }
+    setSendingAll(false);
+    fetchTicket()
   }
   return (
     <>

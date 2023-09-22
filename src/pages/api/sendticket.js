@@ -159,7 +159,7 @@ export default async function handler(req, res) {
         } catch (error) {
             return res.json({ success: false, msg: error.message, data })
         }
-        res.status(200).json({ name: 'John Doe' });
+        
     });
 
 }
