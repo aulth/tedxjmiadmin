@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer'
 import SendSingleTicket from '@/components/admin/SendSingleTicket'
 import Head from 'next/head'
 const page = () => {
@@ -12,6 +13,7 @@ const page = () => {
         <title>TEDxJMI - Send Ticket</title>
       </Head>
     <SendSingleTicket/>
+    <Footer/>
     </>
   )
 }
