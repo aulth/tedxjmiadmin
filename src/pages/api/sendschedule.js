@@ -74,7 +74,7 @@ export default async function handler(req, res) {
             <p>TEDxJMI Organising Team</p></div></div>
         `
             const mailOption = {
-                from: `TEDxJMI <noreply.tedxjmi@gmail.com>`,
+                from: `TEDxJMI <tedxjmi.pass@gmail.com>`,
                 to: ticket.email.toLowerCase(),
                 subject: `Itinerary For The Day`,
                 html: message,
