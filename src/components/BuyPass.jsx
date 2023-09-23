@@ -98,7 +98,7 @@ const BuyPass = () => {
     const fetchTicketCount = async () => {
         const response = await fetch("/api/getcount");
         const json = await response.json();
-        if (json.count >= 300) {
+        if (json.count >= 400) {
             setSoldOut(true);
         }
 
