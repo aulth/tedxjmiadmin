@@ -152,7 +152,7 @@ export default async function handler(req, res) {
 </div>
         `
             const mailOption = {
-                from: `TEDxJMI <tedxjmi.pass@gmail.com>`,
+                from: `TEDxJMI <pass.tedxjmi@gmail.com>`,
                 to: data.email.toLowerCase(),
                 subject: `Registration Pass`,
                 html: message
